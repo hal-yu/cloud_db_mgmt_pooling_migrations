@@ -1,4 +1,4 @@
 .env
 a.env
 azure_alembic.ini
-gcp_alembic.ini
+/home/haley_yu/cloud_db_mgmt_pooling_migrations/gcp/gcp_alembic.ini
