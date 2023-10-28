@@ -7,8 +7,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-AZUREURL = os.getenv("AZURE")
-
 # Database connection settings from environment variables
 DB_HOST = os.getenv("DB_HOST")
 DB_DATABASE = os.getenv("DB_DATABASE")
@@ -44,10 +42,11 @@ class patients(Base):
     pxtable = relationship('doctors', back_populates='patients')
 
 connect_args={'ssl':{'fake_flag_to_enable_tls': True}}
-connection_string = ("mysql+pymysql://halyu:Cakesotall123!@haley-pool.mysql.database.azure.com:3306/haley"
-                    f"?charset=utf8mb4")
-
-engine = create_engine(AZUREURL,
+connection_string = (f'mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_DATABASE}'
+                    f"?charset={DB_CHARSET}")
+                    
+engine = create_engine(
+        connection_string,
         connect_args=connect_args)
 
 inspector = inspect(engine)

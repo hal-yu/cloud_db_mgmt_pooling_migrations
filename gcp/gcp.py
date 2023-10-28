@@ -40,9 +40,8 @@ class patients(Base):
     pxtable = relationship('doctors', back_populates='patients')
 
 connect_args={'ssl':{'fake_flag_to_enable_tls': True}}
-connection_string = ("mysql+pymysql://root:Cakesotall123!@34.29.138.236:3306/halyu"
-                    f"?charset=utf8mb4")
-
+connection_string = (f'mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_DATABASE}'
+                    f"?charset={DB_CHARSET}")
 engine = create_engine(
         connection_string,
         connect_args=connect_args)
