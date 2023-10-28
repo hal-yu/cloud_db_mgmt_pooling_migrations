@@ -1,2 +1,4 @@
-alembic.ini
+.env
 a.env
+azure_alembic.ini
+gcp_alembic.ini
