@@ -13,3 +13,8 @@ f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_DATABASE}"
 ```
 I connected it to MySQL Workbench to create an ERD diagram using the 2 tables: patients and doctors. 
 
+## Migration
+I created azure.py and gcp.py file. I inserted values into my tables. In case they weren't installed previously, I did pip install mysqlalchemy and pymysql into the terminal. After using ```alembic initmigrations``` into the terminal, an alembic.ini file and migrations appeared. In line 63 of the alembic.ini file, change it to ```sqlalchemy.url = mysql+mysqlconnector://username:password@host/database_name```. In the env.py file under migrations folder, change line 19 to the python file name, either azure or gcp, and ```target_metadata = Base.metadata```. Run ```alembic revision --autogenerate -m "create tables"``` into the terminal. Then run ```alembic upgrade head``` to run migrations and ```alembic upgrade head --sql > migration.sql``` to update and see the changes. 
+
+## Flask
+A flask app was connected to the MySQL instances and displayed the database doctors and patients with d
