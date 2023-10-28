@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+AZUREURL = os.getenv("AZURE")
+
 # Database connection settings from environment variables
 DB_HOST = os.getenv("DB_HOST")
 DB_DATABASE = os.getenv("DB_DATABASE")
@@ -17,7 +19,7 @@ DB_CHARSET = os.getenv("DB_CHARSET", "utf8mb4")
 
 Base = declarative_base() 
  
-class doctors(Base):
+class Doctors(Base):
     __tablename__ = 'doctors'
     
     doctor_id = Column(Integer, primary_key=True)
@@ -36,23 +38,23 @@ class patients(Base):
     date_of_birth = Column(Date, nullable=False)
     contact_number = Column(String(15))    
     primary_doctor_id = Column(Integer, ForeignKey('doctors.doctor_id'), nullable=False) 
-    
+    phone_number = Column(String(15))
+    gender = Column(String(30))    
+
     pxtable = relationship('doctors', back_populates='patients')
 
-# sqlalchemy-engine to connect to db:
 connect_args={'ssl':{'fake_flag_to_enable_tls': True}}
-connection_string = (f'mysql+pymysql://halyu:Cakesotall123!@haley-pool.mysql.database.azure.com:3306/haley'
+connection_string = ("mysql+pymysql://halyu:Cakesotall123!@haley-pool.mysql.database.azure.com:3306/haley"
                     f"?charset=utf8mb4")
 
-engine = create_engine(
-        connection_string,
+engine = create_engine(AZUREURL,
         connect_args=connect_args)
 
-
-# Test connection
 inspector = inspect(engine)
 inspector.get_table_names()
 
-
 # Create tables using sqlalchemy models
 Base.metadata.create_all(engine)
+
+
+

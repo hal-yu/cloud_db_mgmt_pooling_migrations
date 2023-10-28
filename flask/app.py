@@ -11,10 +11,11 @@ DB_HOST = os.getenv("DB_HOST")
 DB_DATABASE = os.getenv("DB_DATABASE")
 DB_USERNAME = os.getenv("DB_USERNAME")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
+
 # Connection string
 conn_string = (
-    f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_DATABASE}"
-)
+f"mysql+pymysql://halyu:Cakesotall123!@haley-pool.mysql.database.azure.com:3306/haley"
+             f"?charset=utf8mb4")
 
 # Create a database engine
 engine = create_engine(conn_string, echo=False)
